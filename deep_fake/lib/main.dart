@@ -1,3 +1,4 @@
+import 'package:deep_fake/screens/auth/landingpage.dart';
 import 'package:flutter/material.dart';
 
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: Login_Page(),
+       home: landingPage(),
 
     );
   }

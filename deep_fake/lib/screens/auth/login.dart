@@ -58,11 +58,11 @@ class _Login_PageState extends State<Login_Page> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Image.asset(
-                        'images/moofli_logo.jpg', // Path to your logo
-                        width: screenWidth * 0.25, // Adjust width as needed
-                        height: screenHeight * 0.15, // Adjust height as needed
-                      ),
+                      // child: Image.asset(
+                      //   'images/moofli_logo.jpg', // Path to your logo
+                      //   width: screenWidth * 0.25, // Adjust width as needed
+                      //   height: screenHeight * 0.15, // Adjust height as needed
+                      // ),
                     ),
                     const SizedBox(height: 20.0),
                     const Text(
@@ -240,7 +240,7 @@ class _Login_PageState extends State<Login_Page> {
                                         width: 40.0,
                                         height: 40.7,
                                         child: Image.asset(
-                                            'images/skillop_logo.png'),
+                                            'images/2.png'),
                                       ),
                                       onPressed: () {
                                         // Implement Skillop login functionality
