@@ -1,7 +1,5 @@
+import 'package:deep_fake/screens/home/home.dart';
 import 'package:flutter/material.dart';
-
-
-
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -32,7 +30,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 20),
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Name',
+                  hintText: 'Name',
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(),
@@ -41,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 20),
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Email',
+                  hintText: 'Email',
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(),
@@ -50,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 20),
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Password',
+                  hintText: 'Password',
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(),
@@ -60,7 +58,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 20),
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(
-                  labelText: 'Select a security question',
+                  hintText: 'Select a security question',
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(),
@@ -93,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 20),
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Answer',
+                  hintText: 'Answer',
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(),
@@ -101,7 +99,10 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                },
                 child: Text('Sign Up'),
               ),
             ],
