@@ -1,8 +1,6 @@
 import 'package:deep_fake/screens/auth/login.dart';
 import 'package:deep_fake/screens/auth/signup.dart';
-import 'package:deep_fake/screens/home/home.dart';
 import 'package:flutter/material.dart';
-
 
 class landingPage extends StatefulWidget {
   const landingPage({super.key});
@@ -15,7 +13,6 @@ class _landingPageState extends State<landingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: Container(
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 6, 78, 185),
@@ -33,11 +30,11 @@ class _landingPageState extends State<landingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Image.asset(
+                      Image.asset(
                         'images/2.png',
                         height: 60,
                         width: 60,
-                       ),
+                      ),
                       Text("Fakify",
                           style: TextStyle(
                             fontWeight: FontWeight.w900,
@@ -80,7 +77,9 @@ class _landingPageState extends State<landingPage> {
                   //     ),
                   //   ),
                   // ),
-                  SizedBox(height: 60,),
+                  SizedBox(
+                    height: 60,
+                  ),
                   Text("Try Now",
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
@@ -99,7 +98,7 @@ class _landingPageState extends State<landingPage> {
                           fontWeight: FontWeight.w500,
                           fontSize: 22,
                           color: Color.fromARGB(255, 226, 38, 207))),
-        
+
                   SizedBox(height: 80),
                   // Log In button
                   Stack(
@@ -130,12 +129,11 @@ class _landingPageState extends State<landingPage> {
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: Colors.transparent,
-                                shape:const RoundedRectangleBorder(
+                                shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
                                 ),
                               ),
-        
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -143,7 +141,6 @@ class _landingPageState extends State<landingPage> {
                                       builder: (context) => Login_Page()),
                                 );
                               },
-        
                               child: Padding(
                                 padding: const EdgeInsets.only(
                                     top: 14, bottom: 14, left: 30, right: 30),
@@ -184,16 +181,19 @@ class _landingPageState extends State<landingPage> {
                     child: ElevatedButton(
                       style: (ElevatedButton.styleFrom(
                         elevation: 0,
-                        side:const BorderSide(style: BorderStyle.solid, width: 2),
-                        shape:const  RoundedRectangleBorder(
+                        side: const BorderSide(
+                            style: BorderStyle.solid, width: 2),
+                        shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         backgroundColor: Colors.white,
                         textStyle: TextStyle(color: Colors.black),
                       )),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => SignUpPage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -201,9 +201,7 @@ class _landingPageState extends State<landingPage> {
                         child: Text(
                           "Sign Up",
                           style: TextStyle(color: Colors.black),
-                          
                         ),
-                        
                       ),
                     ),
                   )
@@ -213,7 +211,6 @@ class _landingPageState extends State<landingPage> {
           ),
         ),
       ),
-      
     );
   }
 }
