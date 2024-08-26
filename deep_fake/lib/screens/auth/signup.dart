@@ -8,7 +8,10 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   String? _selectedQuestion;
-
+  final emailController = TextEditingController();
+   final nameController = TextEditingController();
+    final passwordController = TextEditingController();
+     final answerController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,8 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 20),
               TextField(
-                decoration: InputDecoration(
+                controller: nameController,
+                decoration: InputDecoration(                 
                   hintText: 'Name',
                   filled: true,
                   fillColor: Colors.white,
@@ -38,6 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 20),
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   hintText: 'Email',
                   filled: true,
@@ -47,6 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 20),
               TextField(
+                controller: passwordController,
                 decoration: InputDecoration(
                   hintText: 'Password',
                   filled: true,
@@ -90,6 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 20),
               TextField(
+                controller: answerController,
                 decoration: InputDecoration(
                   hintText: 'Answer',
                   filled: true,

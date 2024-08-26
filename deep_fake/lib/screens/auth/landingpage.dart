@@ -1,6 +1,6 @@
 import 'package:deep_fake/screens/auth/login.dart';
 import 'package:deep_fake/screens/auth/signup.dart';
-import 'package:deep_fake/screens/home/home.dart';
+
 import 'package:flutter/material.dart';
 
 
@@ -18,8 +18,16 @@ class _landingPageState extends State<landingPage> {
      
       body: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 6, 78, 185),
+          // image: Image.asset(name),
+        gradient: LinearGradient(
+          colors: [
+            Color(0xFF800080), // Start color (Purple)
+            Color(0xFF4B0082), // End color (Indigo Purple)
+          ],
+        begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
+      ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Center(
@@ -32,73 +40,73 @@ class _landingPageState extends State<landingPage> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                       Image.asset(
-                        'images/2.png',
-                        height: 60,
-                        width: 60,
-                       ),
+                     children: [
+                    //    Image.asset(
+                    //     'images/2.png',
+                    //     height: 60,
+                    //     width: 60,
+                    //    ),
                       Text("Fakify",
                           style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 40,
-                            color: Color.fromARGB(255, 90, 147, 232),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 60,
+                            color: Colors.white
                           )),
                     ],
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                  Text("Unmask the Fake, ",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 40,
-                          color: Color.fromARGB(255, 122, 181, 223))),
-                  const Text("Trust the Real",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 45,
-                        color: Color.fromARGB(255, 156, 120, 238),
-                        fontStyle: FontStyle.italic,
-                        letterSpacing: 2,
-                      )),
-                  // progress bar
-                  // Align(
-                  //   alignment: Alignment(-0.55, 0),
-                  //   child: Container(
-                  //     width: 138,
-                  //     height: 4,
-                  //     decoration:const BoxDecoration(
-                  //       gradient: LinearGradient(
-                  //         colors: [
-                  //           Color(0xFF108CFF),
-                  //           Color(0xFF0EAB00),
-                  //           Color(0xFFFFB800),
-                  //           Color(0xFFFD0C0C)
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
+                  // SizedBox(
+                  //   height: 100,
                   // ),
-                  SizedBox(height: 60,),
-                  Text("Try Now",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 40,
-                          color: Colors.purple[600])),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text("Fakify serves as",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 25,
-                          color: Color.fromARGB(255, 90, 147, 232))),
-                  Text("Your Shield Against Deep Fakes",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22,
-                          color: Color.fromARGB(255, 226, 38, 207))),
+                  // Text("Unmask the Fake, ",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.w500,
+                  //         fontSize: 40,
+                  //         color: Color.fromARGB(255, 122, 181, 223))),
+                  // const Text("Trust the Real",
+                  //     style: TextStyle(
+                  //       fontWeight: FontWeight.w900,
+                  //       fontSize: 45,
+                  //       color: Color.fromARGB(255, 156, 120, 238),
+                  //       fontStyle: FontStyle.italic,
+                  //       letterSpacing: 2,
+                  //     )),
+                  // // progress bar
+                  // // Align(
+                  // //   alignment: Alignment(-0.55, 0),
+                  // //   child: Container(
+                  // //     width: 138,
+                  // //     height: 4,
+                  // //     decoration:const BoxDecoration(
+                  // //       gradient: LinearGradient(
+                  // //         colors: [
+                  // //           Color(0xFF108CFF),
+                  // //           Color(0xFF0EAB00),
+                  // //           Color(0xFFFFB800),
+                  // //           Color(0xFFFD0C0C)
+                  // //         ],
+                  // //       ),
+                  // //     ),
+                  // //   ),
+                  // // ),
+                  // SizedBox(height: 60,),
+                  // Text("Try Now",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.w500,
+                  //         fontSize: 40,
+                  //         color: Colors.purple[600])),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                  // Text("Fakify serves as",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.w400,
+                  //         fontSize: 25,
+                  //         color: Color.fromARGB(255, 90, 147, 232))),
+                  // Text("Your Shield Against Deep Fakes",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.w500,
+                  //         fontSize: 22,
+                  //         color: Color.fromARGB(255, 226, 38, 207))),
         
                   SizedBox(height: 80),
                   // Log In button

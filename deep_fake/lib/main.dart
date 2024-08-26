@@ -1,4 +1,5 @@
 import 'package:deep_fake/screens/auth/landingpage.dart';
+import 'package:deep_fake/screens/home/home.dart';
 import 'package:flutter/material.dart';
 
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return const MaterialApp(
+   return  MaterialApp(
       debugShowCheckedModeBanner: false,
        home: landingPage(),
 
