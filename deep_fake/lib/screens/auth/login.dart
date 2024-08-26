@@ -1,8 +1,10 @@
 import 'package:deep_fake/screens/auth/forgotpassword.dart';
 import 'package:deep_fake/screens/auth/signup.dart';
 import 'package:deep_fake/screens/home/home.dart';
+import 'package:deep_fake/services/auth/auth_provider.dart';
 import 'package:deep_fake/utils/snackbar_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Login_Page extends StatefulWidget {
   const Login_Page({super.key});
@@ -14,6 +16,7 @@ class Login_Page extends StatefulWidget {
 class _Login_PageState extends State<Login_Page> {
   final _formKey = GlobalKey<FormState>();
   final _emailOrPhoneController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isChecked = false;
 
   String? _validateEmailOrPhone(String? value) {
@@ -21,7 +24,6 @@ class _Login_PageState extends State<Login_Page> {
       return 'Please enter your email or phone number';
     }
 
-    // Regular expressions for validation
     final RegExp emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
     final RegExp phoneRegex = RegExp(r'^\d{10}$');
 
@@ -35,6 +37,7 @@ class _Login_PageState extends State<Login_Page> {
   @override
   void dispose() {
     _emailOrPhoneController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -60,11 +63,7 @@ class _Login_PageState extends State<Login_Page> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      // child: Image.asset(
-                      //   'images/moofli_logo.jpg', // Path to your logo
-                      //   width: screenWidth * 0.25, // Adjust width as needed
-                      //   height: screenHeight * 0.15, // Adjust height as needed
-                      // ),
+                      // child: Image.asset('images/moofli_logo.jpg'),
                     ),
                     const SizedBox(height: 20.0),
                     const Text(
@@ -93,17 +92,19 @@ class _Login_PageState extends State<Login_Page> {
                             ),
                             validator: _validateEmailOrPhone,
                           ),
+                          const SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _passwordController,
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              labelText: 'Password',
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                            ),
+                          ),
                         ],
-                      ),
-                    ),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -111,7 +112,6 @@ class _Login_PageState extends State<Login_Page> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          iconAlignment: IconAlignment.end,
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -119,10 +119,9 @@ class _Login_PageState extends State<Login_Page> {
                                     builder: (context) => Forgotpassword()));
                           },
                           style: TextButton.styleFrom(
-                              foregroundColor:
-                                  const Color.fromRGBO(155, 0, 210, 1.0)
-                              // This sets the text color
-                              ),
+                            foregroundColor:
+                                const Color.fromRGBO(155, 0, 210, 1.0),
+                          ),
                           child: const Text(
                             'Forgot your password?',
                             textAlign: TextAlign.right,
@@ -131,32 +130,43 @@ class _Login_PageState extends State<Login_Page> {
                       ],
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          showSuccessMessage(context,
-                              message: 'Log in Successful');
-                          // If the form is valid, navigate to the signup page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
+                          bool success = await Provider.of<MyAuthProvider>(
+                                  context,
+                                  listen: false)
+                              .login(_emailOrPhoneController.text,
+                                  _passwordController.text);
+
+                          if (success) {
+                            showSuccessMessage(context,
+                                message: 'Log in Successful');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                            );
+                          } else {
+                            showErrorMessage(context,
+                                message: 'Login Failed. Please try again.');
+                          }
                         } else {
-                          // Show error message
                           showErrorMessage(context,
                               message:
                                   'Please enter a valid email or 10-digit phone number');
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(
+                        backgroundColor: MaterialStateProperty.all(
                             const Color.fromRGBO(155, 0, 210, 1.0)),
                       ),
                       child: const Padding(
                         padding: EdgeInsets.all(16.0),
                         child: Text(
-                          'Log in ',
+                          'Log in',
                           style: TextStyle(
-                              color: Color.fromRGBO(255, 255, 255, 1)),
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                          ),
                         ),
                       ),
                     ),
@@ -214,16 +224,15 @@ class _Login_PageState extends State<Login_Page> {
                                     ),
                                   ),
                                   Container(
-                                      height: 50, // Adjust height as needed
-                                      width:
-                                          2, // Set the thickness of the divider
+                                      height: 50,
+                                      width: 2,
                                       color:
                                           const Color.fromRGBO(50, 50, 50, 1)),
                                   Expanded(
                                     child: IconButton(
                                       icon: SizedBox(
-                                        width: 34.0,
-                                        height: 33.0,
+                                        width: 37.0,
+                                        height: 37.0,
                                         child: Image.asset(
                                             'images/facebook_logo.png'),
                                       ),
@@ -232,95 +241,11 @@ class _Login_PageState extends State<Login_Page> {
                                       },
                                     ),
                                   ),
-                                  Container(
-                                      height: 50, // Adjust height as needed
-                                      width:
-                                          2, // Set the thickness of the divider
-                                      color: const Color.fromRGBO(50, 50, 50,
-                                          1)), // Divider between buttons
-                                  Expanded(
-                                    child: IconButton(
-                                      icon: SizedBox(
-                                        width: 40.0,
-                                        height: 40.7,
-                                        child: Image.asset('images/2.png'),
-                                      ),
-                                      onPressed: () {
-                                        // Implement Skillop login functionality
-                                      },
-                                    ),
-                                  ),
                                 ],
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CheckboxTheme(
-                          data: const CheckboxThemeData(
-                            side: BorderSide(
-                                color: Color.fromRGBO(155, 0, 210, 1.0),
-                                width: 2),
-                          ),
-                          child: Checkbox(
-                            value: _isChecked,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                _isChecked = value ?? false;
-                              });
-                            },
-                          ),
-                        ),
-                        const Text(
-                          'Do you want to know the news?',
-                          style: TextStyle(
-                              color: Color.fromRGBO(9, 9, 9, 1),
-                              fontFamily: "Poppins"),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        text: '''By signing up or logging in, you agree to 
-  our ''',
-                        style: TextStyle(
-                          color: Color.fromRGBO(106, 106, 106, 1),
-                          fontSize: 16.0,
-                          fontFamily: "Poppins",
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: 'Terms of service',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontFamily: "Poppins",
-                                decoration: TextDecoration.underline),
-                          ),
-                          TextSpan(
-                            text: ' and ',
-                            style: TextStyle(
-                              color: Color.fromRGBO(106, 106, 106, 1),
-                              fontFamily: "Poppins",
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'Privacy policy',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline),
-                          ),
-                        ],
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -336,13 +261,10 @@ class _Login_PageState extends State<Login_Page> {
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => SignUpPage()));
-                        // Add your password recovery logic here
                       },
                       style: TextButton.styleFrom(
-                          foregroundColor:
-                              const Color.fromRGBO(155, 0, 210, 1.0)
-                          // This sets the text color
-                          ),
+                        foregroundColor: const Color.fromRGBO(155, 0, 210, 1.0),
+                      ),
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(

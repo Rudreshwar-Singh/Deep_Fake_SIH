@@ -1,18 +1,16 @@
 import 'package:deep_fake/screens/auth/login.dart';
 import 'package:flutter/material.dart';
+
 class ResetPassword extends StatefulWidget {
-   final String email;
+  final String email;
 
   ResetPassword({required this.email});
-   @override
+  @override
   State<ResetPassword> createState() => _ResetPasswordState();
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
- 
   final TextEditingController newPasswordController = TextEditingController();
-
-  
 
   void resetPassword(BuildContext context) {
     // Simulate an API call to reset the password
@@ -27,7 +25,7 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       backgroundColor: Colors.deepPurple[900],
       body: Padding(
         padding: EdgeInsets.all(20.0),
