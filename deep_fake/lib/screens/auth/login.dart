@@ -1,3 +1,4 @@
+import 'package:deep_fake/screens/auth/forgotpassword.dart';
 import 'package:deep_fake/screens/auth/signup.dart';
 import 'package:deep_fake/screens/home/home.dart';
 import 'package:deep_fake/utils/snackbar_helper.dart';
@@ -111,7 +112,10 @@ class _Login_PageState extends State<Login_Page> {
                         TextButton(
                           iconAlignment: IconAlignment.end,
                           onPressed: () {
-                            // Add your password recovery logic here
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Forgotpassword()));
                           },
                           style: TextButton.styleFrom(
                               foregroundColor:
@@ -133,8 +137,7 @@ class _Login_PageState extends State<Login_Page> {
                           // If the form is valid, navigate to the signup page
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>  HomePage()),
+                            MaterialPageRoute(builder: (context) => HomePage()),
                           );
                         } else {
                           // Show error message
@@ -239,8 +242,7 @@ class _Login_PageState extends State<Login_Page> {
                                       icon: SizedBox(
                                         width: 40.0,
                                         height: 40.7,
-                                        child: Image.asset(
-                                            'images/2.png'),
+                                        child: Image.asset('images/2.png'),
                                       ),
                                       onPressed: () {
                                         // Implement Skillop login functionality
@@ -332,7 +334,7 @@ class _Login_PageState extends State<Login_Page> {
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                             builder: (context) => Signuppg1()));
+                            builder: (context) => SignUpPage()));
                         // Add your password recovery logic here
                       },
                       style: TextButton.styleFrom(

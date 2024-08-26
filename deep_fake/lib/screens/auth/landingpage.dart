@@ -1,5 +1,6 @@
 import 'package:deep_fake/screens/auth/login.dart';
 import 'package:deep_fake/screens/auth/signup.dart';
+import 'package:deep_fake/screens/home/home.dart';
 import 'package:flutter/material.dart';
 
 
@@ -57,7 +58,7 @@ class _landingPageState extends State<landingPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
                         fontSize: 45,
-                        color: Color.fromARGB(255, 50, 70, 222),
+                        color: Color.fromARGB(255, 156, 120, 238),
                         fontStyle: FontStyle.italic,
                         letterSpacing: 2,
                       )),
@@ -97,7 +98,7 @@ class _landingPageState extends State<landingPage> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 22,
-                          color: Colors.blue[900])),
+                          color: Color.fromARGB(255, 226, 38, 207))),
         
                   SizedBox(height: 80),
                   // Log In button
@@ -192,7 +193,7 @@ class _landingPageState extends State<landingPage> {
                       )),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Signuppg1()));
+                            MaterialPageRoute(builder: (context) => SignUpPage()));
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(
