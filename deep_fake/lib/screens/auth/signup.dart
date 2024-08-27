@@ -1,5 +1,7 @@
 import 'package:deep_fake/screens/home/home.dart';
+import 'package:deep_fake/services/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -9,11 +11,15 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   String? _selectedQuestion;
   final emailController = TextEditingController();
-   final nameController = TextEditingController();
-    final passwordController = TextEditingController();
-     final answerController = TextEditingController();
+  final nameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final answerController = TextEditingController();
+
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<MyAuthProvider>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Colors.blue[900],
       body: Center(
@@ -33,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(height: 20),
               TextField(
                 controller: nameController,
-                decoration: InputDecoration(                 
+                decoration: InputDecoration(
                   hintText: 'Name',
                   filled: true,
                   fillColor: Colors.white,
@@ -105,13 +111,43 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                },
-                child: Text('Sign Up'),
-              ),
+              isLoading
+                  ? CircularProgressIndicator()
+                  : ElevatedButton(
+                      onPressed: () async {
+                        if (_selectedQuestion != null) {
+                          final success = await authProvider.signUp(
+                            nameController.text,
+                            emailController.text,
+                            passwordController.text,
+                            _selectedQuestion!,
+                            answerController.text,
+                          );
+                          if (success) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text('Sign up failed. Please try again.'),
+                              ),
+                            );
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                                  Text('Please select a security question.'),
+                            ),
+                          );
+                        }
+                      },
+                      child: Text('Sign Up'),
+                    ),
             ],
           ),
         ),

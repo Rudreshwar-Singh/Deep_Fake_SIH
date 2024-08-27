@@ -8,18 +8,22 @@ class MyAuthProvider with ChangeNotifier {
   String? _token;
   String? get token => _token;
 
-  Future<bool> signUp(String email, String password) async {
+  Future<bool> signUp(String name, String email, String password,
+      String question, String answer) async {
     final url = Uri.parse('$baseUrl/signup');
     try {
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
+          'name': name,
           'email': email,
           'password': password,
+          'question': question,
+          'answer': answer,
         }),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return true;
       } else {
         return false;
