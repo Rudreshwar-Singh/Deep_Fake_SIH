@@ -58,7 +58,7 @@ class MyAuthProvider with ChangeNotifier {
   }
 
   Future<String?> getSecurityQuestion(String email) async {
-    final url = Uri.parse('$baseUrl/security-question');
+    final url = Uri.parse('$baseUrl/get-security-question');
     try {
       final response = await http.post(
         url,
@@ -77,7 +77,7 @@ class MyAuthProvider with ChangeNotifier {
   }
 
   Future<bool> verifySecurityAnswer(String email, String answer) async {
-    final url = Uri.parse('$baseUrl/verify-answer');
+    final url = Uri.parse('$baseUrl/verify-question');
     try {
       final response = await http.post(
         url,

@@ -17,7 +17,7 @@ class _Login_PageState extends State<Login_Page> {
   final _formKey = GlobalKey<FormState>();
   final _emailOrPhoneController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isChecked = false;
+  // bool _isChecked = false;
 
   String? _validateEmailOrPhone(String? value) {
     if (value == null || value.isEmpty) {
@@ -44,7 +44,7 @@ class _Login_PageState extends State<Login_Page> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
+    // final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.white,

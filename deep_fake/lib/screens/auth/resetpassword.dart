@@ -1,26 +1,47 @@
 import 'package:deep_fake/screens/auth/login.dart';
+import 'package:deep_fake/services/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ResetPassword extends StatefulWidget {
   final String email;
 
   ResetPassword({required this.email});
+
   @override
   State<ResetPassword> createState() => _ResetPasswordState();
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
   final TextEditingController newPasswordController = TextEditingController();
+  bool _isLoading = false;
 
-  void resetPassword(BuildContext context) {
-    // Simulate an API call to reset the password
-    // Replace this with your actual API call
-    print('New Password: ${newPasswordController.text}');
-    // Navigate to the login page after successful password reset
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => Login_Page()),
-    );
+  void resetPassword(BuildContext context) async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final authProvider = Provider.of<MyAuthProvider>(context, listen: false);
+    bool success = await authProvider.resetPassword(
+        widget.email, newPasswordController.text);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (success) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Login_Page()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to reset password. Please try again.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override
@@ -59,10 +80,12 @@ class _ResetPasswordState extends State<ResetPassword> {
               obscureText: true,
             ),
             SizedBox(height: 20.0),
-            ElevatedButton(
-              child: Text('Reset Password'),
-              onPressed: () => resetPassword(context),
-            ),
+            _isLoading
+                ? CircularProgressIndicator()
+                : ElevatedButton(
+                    child: Text('Reset Password'),
+                    onPressed: () => resetPassword(context),
+                  ),
           ],
         ),
       ),
