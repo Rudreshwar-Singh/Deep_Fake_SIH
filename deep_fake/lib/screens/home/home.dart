@@ -1,10 +1,8 @@
-import 'package:deep_fake/models/result.dart';
-import 'package:deep_fake/screens/home/Result.dart';
 import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
-import 'package:deep_fake/screens/home/about.dart';
 import 'package:file_picker/file_picker.dart';
-// import 'bottom_nav_bar.dart';  // Import the new BottomNavBar widget
+import 'package:provider/provider.dart';
+import 'package:deep_fake/widgets/bottomnavbar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,26 +10,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 2; // Initial active index is 2 (Add Page)
-  final PageController _pageController = PageController(initialPage: 2);
-
-  final List<Widget> _pages = [
-    HomePage(),
-    AboutUsPage(),
-    // CollectionPage(),
-    // AddPage(),
-    // ContactPage(),
-    // ProfilePage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-      _pageController.jumpToPage(index);
-    });
-  }
-
   String _fileName = 'No file chosen';
+  String _filePath = '';
   String _analysisType = 'Spatial Analysis';
 
   Future<void> _chooseFile() async {
@@ -40,28 +20,17 @@ class _HomePageState extends State<HomePage> {
     if (result != null) {
       setState(() {
         _fileName = result.files.single.name;
+        _filePath = result.files.single.path!;
       });
     } else {
-      // User canceled the picker
       setState(() {
         _fileName = 'No file chosen';
+        _filePath = '';
       });
     }
   }
 
   void _submit() {
-   Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => DeepFakeAnalysisPage(
-      // summary: 'This is a summary of the deep fake analysis.',
-      // inconsistencies: ['Facial movements are unnatural in frame 123.', 'Lighting inconsistency detected in frame 456.', 'Lip synchronization issue detected in frame 789.'],
-      // technicalAnalysis: 'The video shows multiple signs of deep fake manipulation, including unnatural facial expressions and lighting inconsistencies. The probability of this video being a deep fake is high.',
-      // probabilityScore: 87.0,
-    ),
-  ),
-);
-
     // Implement submit logic here
     print('File: $_fileName');
     print('Analysis Type: $_analysisType');
@@ -69,81 +38,84 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = context.watch<VideoUploadService>().isLoading;
+
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.deepPurple, Colors.purpleAccent],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+      body: 
+         Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple, Colors.purpleAccent],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
-        ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Upload Video for Analysis',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Upload Video for Analysis',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50),
-                  child: Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: _chooseFile,
-                        child: Text('Choose File'),
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        _fileName,
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    ],
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50),
+                    child: Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: _chooseFile,
+                          child: Text('Choose File'),
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          _fileName,
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  'Select Analysis Type:',
-                  style: TextStyle(color: Colors.white70),
-                ),
-                DropdownButton<String>(
-                  value: _analysisType,
-                  dropdownColor: Color.fromARGB(255, 20, 182, 236),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _analysisType = newValue!;
-                    });
-                  },
-                  items: <String>['Spatial Analysis', 'Temporal Analysis']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value,
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 67, 40, 239))),
-                    );
-                  }).toList(),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _submit,
-                  child: Text('Submit'),
-                ),
-              ],
+                  SizedBox(height: 16),
+                  Text(
+                    'Select Analysis Type:',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                  DropdownButton<String>(
+                    value: _analysisType,
+                    dropdownColor: Color.fromARGB(255, 20, 182, 236),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _analysisType = newValue!;
+                      });
+                    },
+                    items: <String>['Spatial Analysis', 'Temporal Analysis']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value, style: TextStyle(color: Color.fromARGB(255, 67, 40, 239))),
+                      );
+                    }).toList(),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _submit,
+                    child: Text('Submit'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavBar(currentIndex: 0),
+      
+     bottomNavigationBar: BottomNavBar(currentIndex: 0),
+      
     );
   }
 }

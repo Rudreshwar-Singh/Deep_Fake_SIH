@@ -1,13 +1,21 @@
 import 'package:deep_fake/screens/auth/landingpage.dart';
 import 'package:deep_fake/screens/home/home.dart';
 import 'package:deep_fake/services/auth/auth_provider.dart';
+import 'package:deep_fake/services/video/video_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => MyAuthProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MyAuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => VideoUploadService(),
+        ),
+      ],
       child: MyApp(),
     ),
   );
@@ -18,7 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return  MaterialApp(
+   return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: landingPage(),
     );

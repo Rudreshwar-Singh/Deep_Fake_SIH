@@ -1,5 +1,7 @@
-import 'package:deep_fake/screens/auth/resetpassword.dart';
+import 'package:deep_fake/services/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:deep_fake/screens/auth/resetpassword.dart';
 
 class Forgotpassword extends StatefulWidget {
   const Forgotpassword({super.key});
@@ -14,23 +16,33 @@ class _ForgotpasswordState extends State<Forgotpassword> {
   String securityQuestion = '';
   bool showSecurityQuestion = false;
 
-  void getSecurityQuestion() {
-    // Simulate an API call to fetch the security question
-    setState(() {
-      securityQuestion = "What was your first pet's name?";
-      showSecurityQuestion = true;
-    });
+  void getSecurityQuestion() async {
+    final authProvider = Provider.of<MyAuthProvider>(context, listen: false);
+    final question =
+        await authProvider.getSecurityQuestion(emailController.text);
+    if (question != null) {
+      setState(() {
+        securityQuestion = question;
+        showSecurityQuestion = true;
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('User not found or error occurred.')),
+      );
+    }
   }
 
-  void verifyAnswer() {
-    // Simulate an API call to verify the answer
-    if (answerController.text == "correctAnswer") {
+  void verifyAnswer() async {
+    final authProvider = Provider.of<MyAuthProvider>(context, listen: false);
+    final success = await authProvider.verifySecurityAnswer(
+        emailController.text, answerController.text);
+    if (success) {
       Navigator.push(
         context,
-       MaterialPageRoute(builder: (context) => ResetPassword(email: emailController.text)),
+        MaterialPageRoute(
+            builder: (context) => ResetPassword(email: emailController.text)),
       );
     } else {
-      // Show an error message if the answer is incorrect
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Incorrect answer. Please try again.')),
       );
@@ -93,4 +105,3 @@ class _ForgotpasswordState extends State<Forgotpassword> {
     );
   }
 }
-
