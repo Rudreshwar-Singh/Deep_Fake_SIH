@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MyAuthProvider with ChangeNotifier {
-  final String baseUrl = 'http://127.0.0.1:5001/api';
+  final String baseUrl = 'http://localhost:5001/api';
 
   String? _token;
   String? get token => _token;
