@@ -11,6 +11,17 @@ class DeepFakeAnalysis {
     required this.probabilityScore,
   });
 
+  // Map<String, dynamic> toMap() {
+  //   return {
+  //     'summary': summary,
+  //     'inconsistencies': inco,
+  //     'email': email,
+  //     'password': password,
+     
+  //   };
+  // }
+  
+
   factory DeepFakeAnalysis.fromJson(Map<String, dynamic> json) {
     return DeepFakeAnalysis(
       summary: json['summary'],

@@ -1,15 +1,24 @@
+import 'package:deep_fake/screens/home/Result.dart';
+import 'package:deep_fake/services/video/video_upload.dart';
 import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:deep_fake/widgets/bottomnavbar.dart';
+
+import 'package:deep_fake/models/result.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
+ 
+  
+
+  
 }
 
+
 class _HomePageState extends State<HomePage> {
+  
   String _fileName = 'No file chosen';
   String _filePath = '';
   String _analysisType = 'Spatial Analysis';
@@ -31,6 +40,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _submit() {
+   Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => DeepFakeAnalysisPage(
+      summary: 'This is a summary of the deep fake analysis.',
+      inconsistencies: [
+        'Facial movements are unnatural in frame 123.',
+        'Lighting inconsistency detected in frame 456.',
+        'Lip synchronization issue detected in frame 789.'
+      ],
+      technicalAnalysis: 'The video shows multiple signs of deep fake manipulation, including unnatural facial expressions and lighting inconsistencies. The probability of this video being a deep fake is high.',
+      probabilityScore: 87.0,
+    ),
+  ),
+);
+
     // Implement submit logic here
     print('File: $_fileName');
     print('Analysis Type: $_analysisType');
@@ -66,22 +91,29 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50),
-                    child: Row(
-                      children: [
-                        ElevatedButton(
-                          onPressed: _chooseFile,
-                          child: Text('Choose File'),
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          _fileName,
-                          style: TextStyle(color: Colors.white70),
-                        ),
-                      ],
-                    ),
-                  ),
+                 Padding(
+  padding: const EdgeInsets.only(left: 20),
+  child: Row(
+    children: [
+      ElevatedButton(
+        onPressed: _chooseFile,
+        child: Text('Choose File'),
+      ),
+      SizedBox(width: 8),
+      Flexible( // Wrap with Flexible to prevent overflow
+        child: SafeArea(
+          child: Text(
+            _fileName,
+            style: TextStyle(color: Colors.white70),
+            overflow: TextOverflow.ellipsis, // Ensure the text doesn't overflow
+            maxLines: 1, // Limit to a single line
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
                   SizedBox(height: 16),
                   Text(
                     'Select Analysis Type:',
@@ -117,5 +149,7 @@ class _HomePageState extends State<HomePage> {
      bottomNavigationBar: BottomNavBar(currentIndex: 0),
       
     );
+    
   }
+  
 }

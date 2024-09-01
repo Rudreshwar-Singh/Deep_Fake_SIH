@@ -3,14 +3,14 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MyAuthProvider with ChangeNotifier {
-  final String baseUrl = 'http://localhost:5001/api';
+  final String baseUrl = 'https://fakifybackend.onrender.com/api/';
 
   String? _token;
   String? get token => _token;
 
   Future<bool> signUp(String name, String email, String password,
       String question, String answer) async {
-    final url = Uri.parse('$baseUrl/signup');
+    final url = Uri.parse('$baseUrl/auth/signup');
     try {
       final response = await http.post(
         url,
@@ -34,7 +34,7 @@ class MyAuthProvider with ChangeNotifier {
   }
 
   Future<bool> login(String email, String password) async {
-    final url = Uri.parse('$baseUrl/login');
+    final url = Uri.parse('$baseUrl/auth/login');
     try {
       final response = await http.post(
         url,
@@ -58,7 +58,7 @@ class MyAuthProvider with ChangeNotifier {
   }
 
   Future<String?> getSecurityQuestion(String email) async {
-    final url = Uri.parse('$baseUrl/security-question');
+    final url = Uri.parse('$baseUrl/get-security-question');
     try {
       final response = await http.post(
         url,
@@ -77,7 +77,7 @@ class MyAuthProvider with ChangeNotifier {
   }
 
   Future<bool> verifySecurityAnswer(String email, String answer) async {
-    final url = Uri.parse('$baseUrl/verify-answer');
+    final url = Uri.parse('$baseUrl/verify-question');
     try {
       final response = await http.post(
         url,

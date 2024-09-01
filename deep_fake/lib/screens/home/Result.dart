@@ -10,6 +10,21 @@ import 'package:http/http.dart' as http;
 class DeepFakeAnalysisPage extends StatefulWidget {
   @override
   _DeepFakeAnalysisPageState createState() => _DeepFakeAnalysisPageState();
+ 
+  final String summary;
+  final List<String> inconsistencies; // Ensure this is defined
+  final String technicalAnalysis;
+  final double probabilityScore;
+
+  DeepFakeAnalysisPage({
+    required this.summary,
+    required this.inconsistencies, // Ensure this is passed here
+    required this.technicalAnalysis,
+    required this.probabilityScore,
+  });
+
+ 
+
 }
 
 class _DeepFakeAnalysisPageState extends State<DeepFakeAnalysisPage> {
