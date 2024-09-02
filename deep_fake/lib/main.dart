@@ -16,8 +16,9 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => VideoUploadService(),
         ),
-         ChangeNotifierProvider(
-      create: (context) => VideoAnalysisProvider(),),
+        ChangeNotifierProvider(
+          create: (context) => VideoAnalysisProvider(),
+        ),
       ],
       child: MyApp(),
     ),
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: landingPage(),
     );

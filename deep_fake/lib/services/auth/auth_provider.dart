@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class MyAuthProvider with ChangeNotifier {
-  final String baseUrl = 'https://fakifybackend.onrender.com/api/';
+  final String baseUrl = 'https://fakifybackend.onrender.com/api';
 
   String? _token;
   String? get token => _token;
