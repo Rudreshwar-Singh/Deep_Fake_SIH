@@ -15,7 +15,7 @@ class VideoUploadService with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    final uri = Uri.parse('http://127.0.0.1:5001/api');
+    final uri = Uri.parse('https://fakifybackend.onrender.com/api');
     final request = http.MultipartRequest('POST', uri)
       ..fields['analysisType'] = analysisType
       ..files.add(await http.MultipartFile.fromPath('video', filePath));
