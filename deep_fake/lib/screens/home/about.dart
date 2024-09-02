@@ -1,3 +1,4 @@
+import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 
 
@@ -122,6 +123,7 @@ class AboutUsPage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBar(currentIndex: 0),
     );
   }
 }

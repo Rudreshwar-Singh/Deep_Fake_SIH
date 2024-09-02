@@ -1,4 +1,4 @@
-import 'package:deep_fake/screens/auth/landingpage.dart';
+
 import 'package:deep_fake/screens/home/home.dart';
 import 'package:deep_fake/services/auth/auth_provider.dart';
 import 'package:deep_fake/services/video/video_store.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: landingPage(),
+      home: HomePage(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:deep_fake/services/video/video_store.dart';
+import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:deep_fake/models/history.dart';
@@ -47,6 +48,7 @@ class VideoListPage extends StatelessWidget {
           );
         },
       ),
+      bottomNavigationBar: BottomNavBar(currentIndex: 0),
     );
   }
 }
