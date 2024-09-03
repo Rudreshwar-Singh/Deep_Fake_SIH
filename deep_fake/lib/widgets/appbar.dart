@@ -29,14 +29,17 @@ class _AppbarState extends State<Appbar_screen> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(width: 20),
-          Row(
-            children: [
-              Image.asset('images/logo.jpg',
-                  height: 28), // Change this to your logo
-              SizedBox(width: 8),
-              Text('DeFake.ai'),
-            ],
+           SizedBox(width: 3),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Image.asset('images/logo.jpg',
+                    height: 38), // Change this to your logo
+                SizedBox(width: 8),
+                Text('DeFake.ai'),
+              ],
+            ),
           ),
           Row(
             children: [

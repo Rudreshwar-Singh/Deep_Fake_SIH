@@ -32,31 +32,18 @@ class _landingPageState extends State<landingPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                     
-                      Text("DeFake.ai",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'japanese',
-                              fontSize: 60,
-                              color: Colors.orange),),
-                    ],
-                  ),
+                  
+                  
                   SizedBox(height: 20,),
                   Container(
-                    height: 300,
+                    height: 150,
                     child: Row(
                     children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: Image.asset(
                             'images/logo.jpg',
-                             height: 1000,
+                             height: 400,
                              width: 300,
                            ),
                         ),
@@ -64,6 +51,18 @@ class _landingPageState extends State<landingPage> {
                     ),
                   ),
                   SizedBox(height: 10,),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                     
+                      Text("DeFake.ai",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              // fontFamily: 'japanese',
+                              fontSize: 60,
+                              color: Colors.black),),
+                    ],
+                  ),
                  
                   // SizedBox(
                   //   height: 100,
@@ -110,17 +109,29 @@ class _landingPageState extends State<landingPage> {
                   // ),
                   Text("We protect authenticity. ",
                       style: TextStyle(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w800,
                           fontSize: 30,
                           fontFamily: "InstrumentSer",
-                          color:  Color.fromARGB(255, 226, 38, 207))),
-                  Text("Safeguard your digital truth",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "InstrumentSer",
-                          fontSize: 30,
-                          color: Color.fromARGB(255, 226, 38, 207))),
-
+                          color:  Colors.orange)),
+                 RichText(
+  text: TextSpan(
+    text: 'Safeguard your ',
+    style: TextStyle(
+      fontWeight: FontWeight.w800,
+      fontSize: 30,
+      fontFamily: "InstrumentSer",
+      color: Colors.orange,
+    ),
+    children: <TextSpan>[
+      TextSpan(
+        text: 'digital truth',
+        style: TextStyle(
+          color: Colors.orange[900], // Change the color for 'digital truth'
+        ),
+      ),
+    ],
+  ),
+),
                   SizedBox(height: 80),
                   ElevatedButton(
                       onPressed: () {

@@ -1,8 +1,7 @@
-
 import 'package:deep_fake/models/history.dart';
 import 'package:deep_fake/screens/home/spatial.dart';
 import 'package:deep_fake/screens/home/temporal.dart';
-import 'package:deep_fake/services/video/video_store.dart';
+import 'package:deep_fake/services/video/video_store.dart' as store;
 import 'package:deep_fake/services/video/video_upload.dart';
 import 'package:deep_fake/widgets/appbar.dart';
 import 'package:deep_fake/widgets/bottomnavbar.dart';
@@ -37,49 +36,60 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
- void _submit() {
-  if (_filePath.isEmpty) {
-    // Handle no file chosen
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Please choose a file before submitting')),
-    );
-    return;
+  Future<void> _submit() async {
+    if (_filePath.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please choose a file before submitting')),
+      );
+      return;
+    }
+
+    final uploadService = context.read<VideoUploadService>();
+
+    try {
+      await uploadService.uploadVideo(_filePath, _analysisType);
+
+      if (uploadService.report != null) {
+        final videoAnalysis = store.VideoAnalysis(
+          videoName: _fileName,
+          summary: uploadService.report!,
+          inconsistencies: [
+            'Detected inconsistencies that need to be provided by the backend',
+          ],
+          technicalAnalysis: 'Technical analysis provided by the backend',
+          probabilityScore: uploadService.probabilityScore ?? 0.0,
+        );
+
+        context
+            .read<store.VideoAnalysisProvider>()
+            .addVideoAnalysis(videoAnalysis);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Video uploaded and analyzed successfully!')),
+        );
+
+        if (_analysisType == 'Spatial Analysis') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SpatialAnalysisPage(videoPath: _filePath),
+            ),
+          );
+        } else if (_analysisType == 'Temporal Analysis') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TemporalAnalysisPage(videoPath: _filePath),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to upload video: $e')),
+      );
+    }
   }
-
-  // Create a video analysis object
-  final videoAnalysis = VideoAnalysis(
-    videoName: _fileName,
-    summary: 'This is a summary of the deep fake analysis.',
-    inconsistencies: [
-      'Facial movements are unnatural in frame 123.',
-      'Lighting inconsistency detected in frame 456.',
-      'Lip synchronization issue detected in frame 789.'
-    ],
-    technicalAnalysis: 'The video shows multiple signs of deep fake manipulation.',
-    probabilityScore: 87.0,
-  );
-
-  // Store the video analysis in the provider
-  context.read<VideoAnalysisProvider>().addVideoAnalysis(videoAnalysis);
-
-  // Navigate to the appropriate analysis page
-  if (_analysisType == 'Spatial Analysis') {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SpatialAnalysisPage(videoPath: _filePath),
-      ),
-    );
-  } else if (_analysisType == 'Temporal Analysis') {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TemporalAnalysisPage(videoPath: _filePath),
-      ),
-    );
-  }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +225,6 @@ class _HomePageState extends State<HomePage> {
                 ),
         ),
       ),
-      
       bottomNavigationBar: BottomNavBar(currentIndex: 0),
     );
   }
