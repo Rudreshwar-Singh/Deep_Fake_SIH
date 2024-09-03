@@ -37,13 +37,28 @@ class _SpatialAnalysisPageState extends State<SpatialAnalysisPage> {
       appBar: AppBar(
         title: Text('Spatial Analysis'),
       ),
-      body: Center(
-        child: _controller.value.isInitialized
-            ? AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
-              )
-            : CircularProgressIndicator(),
+      body: Container(decoration: BoxDecoration(
+              gradient:LinearGradient(
+  colors: [Color(0xFFFFFFFF), Color(0xFFFFE0B2), Color(0xFFFAF9F6)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+)
+
+
+
+
+          
+            ),
+        child: SingleChildScrollView(
+          child: Center(
+            child: _controller.value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  )
+                : CircularProgressIndicator(),
+          ),
+        ),
       ),
     );
   }

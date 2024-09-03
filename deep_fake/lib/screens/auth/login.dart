@@ -52,13 +52,12 @@ class _Login_PageState extends State<Login_Page> {
          decoration: BoxDecoration(
           // image: Image.asset(name),
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF800080), // Start color (Purple)
-              Color(0xFF4B0082), // End color (Indigo Purple)
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+  colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+)
+
+
         ),
         child: SingleChildScrollView(
             child: Padding(
@@ -108,7 +107,7 @@ class _Login_PageState extends State<Login_Page> {
                               controller: _passwordController,
                               obscureText: true,
                               decoration: const InputDecoration(
-                                fillColor: Colors.white,
+                                fillColor: Colors.black,
                                 labelText: 'Password',
                                 border: OutlineInputBorder(
                                   borderRadius:
@@ -132,7 +131,7 @@ class _Login_PageState extends State<Login_Page> {
                             },
                             style: TextButton.styleFrom(
                               foregroundColor:
-                                  const Color.fromRGBO(155, 0, 210, 1.0),
+                                  Colors.amber[700],
                             ),
                             child: const Text(
                               'Forgot your password?',
@@ -170,7 +169,7 @@ class _Login_PageState extends State<Login_Page> {
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(155, 0, 210, 1.0)),
+                              Colors.orange),
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(16.0),
@@ -191,9 +190,9 @@ class _Login_PageState extends State<Login_Page> {
                         ),
                       ),
                       const SizedBox(height: 10.0),
-                      const Text('Sign in with ',
+                       Text('Sign in with ',
                           style: TextStyle(
-                              color: Color.fromRGBO(155, 0, 210, 1.0),
+                              color: Colors.amber[700],
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center),
                       const SizedBox(height: 10.0),
@@ -266,7 +265,7 @@ class _Login_PageState extends State<Login_Page> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: "Poppins",
-                          color: Color.fromRGBO(106, 106, 106, 1),
+                          color: Colors.black,
                         ),
                       ),
                       TextButton(
@@ -275,7 +274,7 @@ class _Login_PageState extends State<Login_Page> {
                               builder: (context) => SignUpPage()));
                         },
                         style: TextButton.styleFrom(
-                          foregroundColor: const Color.fromRGBO(155, 0, 210, 1.0),
+                          foregroundColor:  Colors.amber[700],
                         ),
                         child: const Text(
                           'Sign Up',

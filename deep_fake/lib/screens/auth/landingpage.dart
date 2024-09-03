@@ -17,13 +17,13 @@ class _landingPageState extends State<landingPage> {
         decoration: BoxDecoration(
           // image: Image.asset(name),
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF800080), // Start color (Purple)
-              Color(0xFF4B0082), // End color (Indigo Purple)
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+  colors: [Color(0xFFFFE0B2), Color(0xFFFFFFE0)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+)
+
+ 
+
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -33,24 +33,38 @@ class _landingPageState extends State<landingPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
-                  Row(
+                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      //  Image.asset(
-                      //   'images/2.png',
-                      //   height: 60,
-                      //   width: 60,
-                      //  ),
-                      Text("Fakify",
+                     
+                      Text("DeFake.ai",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontFamily: 'japanese',
                               fontSize: 60,
-                              color: Colors.white)),
+                              color: Colors.orange),),
                     ],
                   ),
+                  SizedBox(height: 20,),
+                  Container(
+                    height: 300,
+                    child: Row(
+                    children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: Image.asset(
+                            'images/logo.jpg',
+                             height: 1000,
+                             width: 300,
+                           ),
+                        ),
+                    ],
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                 
                   // SizedBox(
                   //   height: 100,
                   // ),
@@ -94,13 +108,13 @@ class _landingPageState extends State<landingPage> {
                   // SizedBox(
                   //   height: 30,
                   // ),
-                  Text("Make it ,",
+                  Text("We protect authenticity. ",
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 30,
                           fontFamily: "InstrumentSer",
-                          color: Colors.blue[900])),
-                  Text("But Don't Fake it",
+                          color:  Color.fromARGB(255, 226, 38, 207))),
+                  Text("Safeguard your digital truth",
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontFamily: "InstrumentSer",
@@ -117,12 +131,12 @@ class _landingPageState extends State<landingPage> {
                       },
                       child: Text(
                         'Try now',
-                        // style: TextStyle(
+                         style: TextStyle(
                         //     fontFamily: "InstrumentSer",
                         //     fontSize: 28,
-                        //     color: Colors.black,
+                             color: Colors.yellow[900],
                         //     fontWeight: FontWeight.bold),
-                      ))
+                      ),),)
                   // Log In button
                   // Stack(
                   //   alignment: Alignment.center,

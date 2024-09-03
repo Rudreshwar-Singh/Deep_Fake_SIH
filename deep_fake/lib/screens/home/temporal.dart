@@ -37,13 +37,29 @@ class _TemporalAnalysisPageState extends State<TemporalAnalysisPage> {
       appBar: AppBar(
         title: Text('Temporal Analysis'),
       ),
-      body: Center(
-        child: _controller.value.isInitialized
-            ? AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
-              )
-            : CircularProgressIndicator(),
+      body: Container(
+        decoration: BoxDecoration(
+              gradient:LinearGradient(
+  colors: [Color(0xFFFFFFFF), Color(0xFFE6E6FA), Color(0xFFFFE0B2)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+)
+
+
+
+
+          
+            ),
+        child: SingleChildScrollView(
+          child: Center(
+            child: _controller.value.isInitialized
+                ? AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  )
+                : CircularProgressIndicator(),
+          ),
+        ),
       ),
     );
   }

@@ -14,39 +14,41 @@ class VideoListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Uploaded Videos'),
       ),
-      body: ListView.builder(
-        itemCount: videoAnalyses.length,
-        itemBuilder: (context, index) {
-          final video = videoAnalyses[index];
-
-          return Card(
-            margin: EdgeInsets.all(8),
-            child: ExpansionTile(
-              title: Text(video.videoName),
-              children: [
-                ListTile(
-                  title: Text(video.summary),
-                  trailing: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DeepFakeAnalysisPage(
-                            summary: video.summary,
-                            inconsistencies: video.inconsistencies,
-                            technicalAnalysis: video.technicalAnalysis,
-                            probabilityScore: video.probabilityScore,
+      body: SingleChildScrollView(
+        child: ListView.builder(
+          itemCount: videoAnalyses.length,
+          itemBuilder: (context, index) {
+            final video = videoAnalyses[index];
+        
+            return Card(
+              margin: EdgeInsets.all(8),
+              child: ExpansionTile(
+                title: Text(video.videoName),
+                children: [
+                  ListTile(
+                    title: Text(video.summary),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DeepFakeAnalysisPage(
+                              summary: video.summary,
+                              inconsistencies: video.inconsistencies,
+                              technicalAnalysis: video.technicalAnalysis,
+                              probabilityScore: video.probabilityScore,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    child: Text('Open Analysis'),
+                        );
+                      },
+                      child: Text('Open Analysis'),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                ],
+              ),
+            );
+          },
+        ),
       ),
       bottomNavigationBar: BottomNavBar(currentIndex: 0),
     );
