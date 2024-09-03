@@ -25,6 +25,16 @@ class VideoListPage extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text(video.summary),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'Inconsistencies: ${video.inconsistencies.join(", ")}'),
+                      Text('Technical Analysis: ${video.technicalAnalysis}'),
+                      Text(
+                          'Probability Score: ${video.probabilityScore.toStringAsFixed(2)}%'),
+                    ],
+                  ),
                   trailing: ElevatedButton(
                     onPressed: () {
                       Navigator.push(

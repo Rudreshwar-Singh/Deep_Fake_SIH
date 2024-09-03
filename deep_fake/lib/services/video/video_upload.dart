@@ -15,25 +15,32 @@ class VideoUploadService with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    final uri = Uri.parse('https://fakifybackend.onrender.com/api');
+    final uri =
+        Uri.parse('https://fakifybackend.onrender.com/api/video/upload-video');
     final request = http.MultipartRequest('POST', uri)
       ..fields['analysisType'] = analysisType
       ..files.add(await http.MultipartFile.fromPath('video', filePath));
 
-    final response = await request.send();
-    final responseBody = await response.stream.bytesToString();
+    try {
+      final response = await request.send();
+      final responseBody = await response.stream.bytesToString();
 
-    if (response.statusCode == 200) {
-      final jsonResponse = json.decode(responseBody);
-      _report = jsonResponse['report'];
-      _probabilityScore = jsonResponse['probabilityScore'].toDouble();
-    } else {
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(responseBody);
+        _report = jsonResponse['report'];
+        _probabilityScore = jsonResponse['probabilityScore'].toDouble();
+      } else {
+        _report = null;
+        _probabilityScore = null;
+        throw Exception('Failed to upload video');
+      }
+    } catch (error) {
       _report = null;
       _probabilityScore = null;
-      throw Exception('Failed to upload video');
+      throw Exception('Failed to upload video: $error');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-
-    _isLoading = false;
-    notifyListeners();
   }
 }
