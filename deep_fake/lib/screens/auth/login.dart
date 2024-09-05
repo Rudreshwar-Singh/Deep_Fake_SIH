@@ -49,24 +49,22 @@ class _Login_PageState extends State<Login_Page> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-         decoration: BoxDecoration(
-          // image: Image.asset(name),
-          gradient: LinearGradient(
-  colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-)
-
-
-        ),
+        decoration: BoxDecoration(
+            // image: Image.asset(name),
+            gradient: LinearGradient(
+          colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )),
         child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: screenHeight - MediaQuery.of(context).padding.top,
-                ),
-                child: IntrinsicHeight(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: screenHeight - MediaQuery.of(context).padding.top,
+              ),
+              child: IntrinsicHeight(
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -95,12 +93,14 @@ class _Login_PageState extends State<Login_Page> {
                               controller: _emailOrPhoneController,
                               decoration: const InputDecoration(
                                 labelText: 'Email or phone number',
+                                labelStyle: TextStyle(color: Colors.grey),
                                 border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
                               validator: _validateEmailOrPhone,
+                              style: TextStyle(color: Colors.white),
                             ),
                             const SizedBox(height: 20.0),
                             TextFormField(
@@ -109,11 +109,13 @@ class _Login_PageState extends State<Login_Page> {
                               decoration: const InputDecoration(
                                 fillColor: Colors.black,
                                 labelText: 'Password',
+                                labelStyle: TextStyle(color: Colors.grey),
                                 border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
+                              style: TextStyle(color: Colors.white),
                             ),
                           ],
                         ),
@@ -130,8 +132,7 @@ class _Login_PageState extends State<Login_Page> {
                                       builder: (context) => Forgotpassword()));
                             },
                             style: TextButton.styleFrom(
-                              foregroundColor:
-                                  Colors.amber[700],
+                              foregroundColor: Colors.amber[700],
                             ),
                             child: const Text(
                               'Forgot your password?',
@@ -148,7 +149,7 @@ class _Login_PageState extends State<Login_Page> {
                                     listen: false)
                                 .login(_emailOrPhoneController.text,
                                     _passwordController.text);
-        
+
                             if (success) {
                               showSuccessMessage(context,
                                   message: 'Log in Successful');
@@ -172,8 +173,8 @@ class _Login_PageState extends State<Login_Page> {
                           }
                         },
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Colors.orange),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.orange),
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(16.0),
@@ -193,10 +194,10 @@ class _Login_PageState extends State<Login_Page> {
                           fontSize: 20,
                         ),
                       ),
-                      const SizedBox(height: 10.0),
-                       Text('Sign in with ',
+                      const SizedBox(height: 5.0),
+                      const Text('Sign in with ',
                           style: TextStyle(
-                              color: Colors.amber[700],
+                              color: Color.fromRGBO(205, 118, 237, 1),
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center),
                       const SizedBox(height: 10.0),
@@ -204,11 +205,11 @@ class _Login_PageState extends State<Login_Page> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
-                            width: 340,
-                            height: 73,
+                            width: 200,
+                            height: 70,
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
-                              color: const Color.fromRGBO(241, 244, 255, 1),
+                              color: const Color.fromARGB(255, 221, 193, 244),
                               borderRadius: BorderRadius.circular(30.0),
                               boxShadow: const [
                                 BoxShadow(
@@ -239,10 +240,10 @@ class _Login_PageState extends State<Login_Page> {
                                       ),
                                     ),
                                     Container(
-                                        height: 50,
+                                        height: 40,
                                         width: 2,
-                                        color:
-                                            const Color.fromRGBO(50, 50, 50, 1)),
+                                        color: const Color.fromRGBO(
+                                            50, 50, 50, 1)),
                                     Expanded(
                                       child: IconButton(
                                         icon: SizedBox(
@@ -269,7 +270,7 @@ class _Login_PageState extends State<Login_Page> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: "Poppins",
-                          color: Colors.black,
+                          color: Color.fromRGBO(195, 195, 195, 1),
                         ),
                       ),
                       TextButton(
@@ -278,12 +279,15 @@ class _Login_PageState extends State<Login_Page> {
                               builder: (context) => SignUpPage()));
                         },
                         style: TextButton.styleFrom(
-                          foregroundColor:  Colors.amber[700],
+                          foregroundColor:
+                              const Color.fromARGB(255, 255, 255, 255),
                         ),
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(
+                            fontSize: 16,
                             fontFamily: "Poppins",
+                            decoration: TextDecoration.underline,
                           ),
                         ),
                       ),
@@ -292,7 +296,7 @@ class _Login_PageState extends State<Login_Page> {
                 ),
               ),
             ),
-          
+          ),
         ),
       ),
     );

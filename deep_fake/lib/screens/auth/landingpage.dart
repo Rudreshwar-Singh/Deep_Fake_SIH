@@ -1,5 +1,4 @@
 import 'package:deep_fake/screens/auth/login.dart';
-import 'package:deep_fake/screens/auth/signup.dart';
 import 'package:flutter/material.dart';
 
 class landingPage extends StatefulWidget {
@@ -15,16 +14,12 @@ class _landingPageState extends State<landingPage> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          // image: Image.asset(name),
-          gradient: LinearGradient(
-  colors: [Color(0xFFFFE0B2), Color(0xFFFFFFE0)],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-)
-
- 
-
-        ),
+            // image: Image.asset(name),
+            gradient: LinearGradient(
+          colors: [Color(0xFFFFE0B2), Color(0xFFFFFFE0)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Center(
@@ -32,26 +27,28 @@ class _landingPageState extends State<landingPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  
-                  
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     height: 150,
                     child: Row(
-                    children: [
+                      children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 30),
                           child: Image.asset(
                             'images/logo.jpg',
-                             height: 400,
-                             width: 300,
-                           ),
+                            height: 400,
+                            width: 300,
+                          ),
                         ),
-                    ],
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10,),
-                   Row(
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                      
@@ -63,7 +60,7 @@ class _landingPageState extends State<landingPage> {
                               color: Colors.black),),
                     ],
                   ),
-                 
+
                   // SizedBox(
                   //   height: 100,
                   // ),
@@ -112,42 +109,47 @@ class _landingPageState extends State<landingPage> {
                           fontWeight: FontWeight.w800,
                           fontSize: 30,
                           fontFamily: "InstrumentSer",
-                          color:  Colors.orange)),
-                 RichText(
-  text: TextSpan(
-    text: 'Safeguard your ',
-    style: TextStyle(
-      fontWeight: FontWeight.w800,
-      fontSize: 30,
-      fontFamily: "InstrumentSer",
-      color: Colors.orange,
-    ),
-    children: <TextSpan>[
-      TextSpan(
-        text: 'digital truth',
-        style: TextStyle(
-          color: Colors.orange[900], // Change the color for 'digital truth'
-        ),
-      ),
-    ],
-  ),
-),
+                          color: Colors.orange)),
+                  RichText(
+                    text: TextSpan(
+                      text: 'Safeguard your ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 30,
+                        fontFamily: "InstrumentSer",
+                        color: Colors.orange,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'digital truth',
+                          style: TextStyle(
+                            color: Colors.orange[
+                                900], // Change the color for 'digital truth'
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 80),
                   ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Login_Page()));
-                      },
-                      child: Text(
-                        'Try now',
-                         style: TextStyle(
-                        //     fontFamily: "InstrumentSer",
-                        //     fontSize: 28,
-                             color: Colors.yellow[900],
-                        //     fontWeight: FontWeight.bold),
-                      ),),)
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Login_Page()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 16,
+                    )),
+                    child: Text(
+                      'Try now',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  )
                   // Log In button
                   // Stack(
                   //   alignment: Alignment.center,
