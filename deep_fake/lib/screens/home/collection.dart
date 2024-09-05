@@ -1,7 +1,6 @@
 import 'package:deep_fake/services/video/video_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:deep_fake/models/history.dart';
 import 'package:deep_fake/screens/home/Result.dart';
 
 class VideoListPage extends StatelessWidget {

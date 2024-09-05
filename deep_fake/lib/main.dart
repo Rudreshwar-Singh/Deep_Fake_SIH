@@ -1,6 +1,6 @@
 import 'package:deep_fake/screens/auth/landingpage.dart';
-import 'package:deep_fake/screens/home/home.dart';
 import 'package:deep_fake/services/auth/auth_provider.dart';
+import 'package:deep_fake/services/contact/contact_provider.dart';
 import 'package:deep_fake/services/video/video_store.dart';
 import 'package:deep_fake/services/video/video_upload.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +18,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => VideoAnalysisProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ContactProvider(),
         ),
       ],
       child: MyApp(),

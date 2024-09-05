@@ -1,5 +1,4 @@
 import 'package:deep_fake/screens/auth/login.dart';
-import 'package:deep_fake/screens/auth/signup.dart';
 import 'package:flutter/material.dart';
 
 class landingPage extends StatefulWidget {
@@ -109,20 +108,24 @@ class _landingPageState extends State<landingPage> {
 
                   SizedBox(height: 80),
                   ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Login_Page()));
-                      },
-                      child: Text(
-                        'Try now',
-                        // style: TextStyle(
-                        //     fontFamily: "InstrumentSer",
-                        //     fontSize: 28,
-                        //     color: Colors.black,
-                        //     fontWeight: FontWeight.bold),
-                      ))
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Login_Page()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 16,
+                    )),
+                    child: Text(
+                      'Try now',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  )
                   // Log In button
                   // Stack(
                   //   alignment: Alignment.center,

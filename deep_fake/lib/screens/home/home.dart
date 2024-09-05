@@ -1,4 +1,3 @@
-import 'package:deep_fake/models/history.dart';
 import 'package:deep_fake/screens/home/spatial.dart';
 import 'package:deep_fake/screens/home/temporal.dart';
 import 'package:deep_fake/services/video/video_store.dart' as store;
