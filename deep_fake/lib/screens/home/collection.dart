@@ -7,49 +7,47 @@ import 'package:deep_fake/screens/home/Result.dart';
 class VideoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final videoAnalyses = context.watch<VideoAnalysisProvider>().videoAnalyses;
+    var videoAnalyses = context.watch<VideoAnalysisProvider>().videoAnalyses;
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Uploaded Videos'),
       ),
-      body: SingleChildScrollView(
-        child: ListView.builder(
-          itemCount: videoAnalyses.length,
-          itemBuilder: (context, index) {
-            final video = videoAnalyses[index];
-        
-            return Card(
-              margin: EdgeInsets.all(8),
-              child: ExpansionTile(
-                title: Text(video.videoName),
-                children: [
-                  ListTile(
-                    title: Text(video.summary),
-                    trailing: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DeepFakeAnalysisPage(
-                              summary: video.summary,
-                              inconsistencies: video.inconsistencies,
-                              technicalAnalysis: video.technicalAnalysis,
-                              probabilityScore: video.probabilityScore,
-                            ),
+      body: ListView.builder(
+        itemCount: videoAnalyses.length,
+        itemBuilder: (context, index) {
+          final video = videoAnalyses[index];
+
+          return Card(
+            margin: EdgeInsets.all(8),
+            child: ExpansionTile(
+              title: Text(video.videoName),
+              children: [
+                ListTile(
+                  title: Text(video.summary),
+                  trailing: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DeepFakeAnalysisPage(
+                            summary: video.summary,
+                            inconsistencies: video.inconsistencies,
+                            technicalAnalysis: video.technicalAnalysis,
+                            probabilityScore: video.probabilityScore,
                           ),
-                        );
-                      },
-                      child: Text('Open Analysis'),
-                    ),
+                        ),
+                      );
+                    },
+                    child: Text('Open Analysis'),
                   ),
-                ],
-              ),
-            );
-          },
-        ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
-      bottomNavigationBar: BottomNavBar(currentIndex: 0),
+      bottomNavigationBar: BottomNavBar(currentIndex: 4),
     );
   }
 }

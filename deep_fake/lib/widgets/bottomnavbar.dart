@@ -1,7 +1,7 @@
 import 'package:deep_fake/screens/home/collection.dart';
 import 'package:deep_fake/screens/home/contact.dart';
-import 'package:deep_fake/screens/home/contact.dart';
 import 'package:deep_fake/screens/home/home.dart';
+import 'package:deep_fake/screens/home/howitwork.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:deep_fake/screens/home/about.dart';
@@ -26,19 +26,11 @@ class BottomNavBar extends StatelessWidget {
         );
         break;
       case 2:
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Add Page'),
-            content: Text('This is the Add page functionality'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('Close'),
-              ),
-            ],
-          ),
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HowItWorksPage()),
         );
+        
         break;
       case 3:
         Navigator.pushReplacement(

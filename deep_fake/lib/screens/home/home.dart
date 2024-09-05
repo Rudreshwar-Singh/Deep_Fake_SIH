@@ -8,7 +8,7 @@ import 'package:deep_fake/widgets/sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:tflite/tflite.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage> {
   String _fileName = 'No file chosen';
   String _filePath = '';
   String _analysisType = 'Spatial Analysis';
-    String? _result;
 
   Future<void> _chooseFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
@@ -35,36 +34,6 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
-@override
-  void initState() {
-    super.initState();
-    loadModel();
-  }
-
-   Future<void> loadModel() async {
-  try {
-    String? res = await Tflite.loadModel(
-      model: "model.tflite", // ensure correct path
-    );
-    print("Model loaded: $res");
-  } catch (e) {
-    print("Error loading model: $e");
-  }
-}
-
-Future<void> runInference() async {
-    // if (_fi == null) return;
-
-    // Example for running inference (adjust depending on your model)
-    // Since TFLite plugin is more suited for image classification, actual implementation might vary
-    var output = await Tflite.runModelOnImage(
-      path: _filePath,   // You might need to convert the video frames to images
-    );
-  setState(() {
-      _result = output?.toString();
-    });
-  }
-
 
   Future<void> _submit() async {
     if (_filePath.isEmpty) {
@@ -126,135 +95,119 @@ Future<void> runInference() async {
     final isLoading = context.watch<VideoUploadService>().isLoading;
 
     return Scaffold(
-      
       drawer: Sidebar(),
       appBar: Appbar_screen(),
-      body: SingleChildScrollView(
-        child: Expanded(
-          child: Container(
-             height: 700,
-            decoration: BoxDecoration(
-              gradient:LinearGradient(
-  colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-)
-
-
-
-
-          
-            ),
-            child: Center(
-              
-              
-              child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+      body: Container(
+        height: 700,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(1.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
                   children: [
-                    Column(
-                      children: [
-                        // SizedBox(height: 20,),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: Text(textAlign: TextAlign.center,
-                                'Upload Video for Analysis',
-                                style: TextStyle(
-                                
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      SizedBox(height: 16,),
-                    
+                    // SizedBox(height: 20,),
                     Row(
-                     
-            children: [
-               Padding(
-                 padding: const EdgeInsets.only( left: 1.5, bottom: 40),
-                 child: Image.asset(
-                  'images/scanner.gif',
-                   width: 404,
-                  height: 300,
-                  fit: BoxFit.cover,
-                             ),
-               ),
-            
-            ]
-          ),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50),
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            'Upload Video for Analysis',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                    // SizedBox(height: 6,),
-                   
-                    // SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: _chooseFile,
-                            child: Text('Choose File', style: TextStyle(color: Colors.black),),
-                          ),
-                          SizedBox(width: 8),
-                          Flexible(
-                            child: SafeArea(
-                              child: Text(
-                                _fileName,
-                                style: TextStyle(color: Colors.black),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ),
-                          ),
-                        ],
+                    SizedBox(
+                      height: 16,
+                    ),
+
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 1.5, bottom: 40),
+                        child: Image.asset(
+                          'images/scanner.gif',
+                          width: 300,
+                          height: 300,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Select Analysis Type:',
-                      style: TextStyle(color: Colors.blue[600]),
-                    ),
-                    DropdownButton<String>(
-                      value: _analysisType,
-                      dropdownColor: Colors.amber[100],
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _analysisType = newValue!;
-                        });
-                      },
-                      items: <String>['Spatial Analysis', 'Temporal Analysis']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: TextStyle(color: Color.fromARGB(255, 67, 40, 239)),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: isLoading ? null : runInference,
-                      child: Text('Submit'),
-                    ),
-                      SizedBox(height: 20),
-            _result == null ? Text("No result yet.") : Text("Result: $_result"),
+                    ]),
                   ],
                 ),
-              ),
-            ),
-          
+                // SizedBox(height: 6,),
+
+                // SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _chooseFile,
+                        child: Text('Choose File'),
+                      ),
+                      SizedBox(width: 8),
+                      Flexible(
+                        child: SafeArea(
+                          child: Text(
+                            _fileName,
+                            style: TextStyle(
+                                color: const Color.fromARGB(179, 29, 29, 29)),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                SizedBox(height: 16),
+                Text(
+                  'Select Analysis Type:',
+                  style: TextStyle(
+                      color:  Colors.orange, fontSize: 20),
+                ),
+                DropdownButton<String>(
+                  value: _analysisType,
+                  dropdownColor: Colors.amber[500],
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _analysisType = newValue!;
+                    });
+                  },
+                  items: <String>['Spatial Analysis', 'Temporal Analysis']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style:
+                            TextStyle(color: Color.fromARGB(255, 67, 40, 239)),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: isLoading ? null : _submit,
+                  child: Text('Submit'),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavBar(currentIndex: 0),

@@ -4,6 +4,7 @@ import 'package:deep_fake/screens/home/home.dart';
 import 'package:deep_fake/services/auth/auth_provider.dart';
 import 'package:deep_fake/utils/snackbar_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class Login_Page extends StatefulWidget {
@@ -47,15 +48,19 @@ class _Login_PageState extends State<Login_Page> {
     // final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: Container(
         decoration: BoxDecoration(
             // image: Image.asset(name),
-            gradient: LinearGradient(
-          colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        )),
+              gradient: LinearGradient(
+  colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+)
+
+        ),
+
+
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -91,16 +96,16 @@ class _Login_PageState extends State<Login_Page> {
                           children: [
                             TextFormField(
                               controller: _emailOrPhoneController,
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 labelText: 'Email or phone number',
-                                labelStyle: TextStyle(color: Colors.grey),
+                                labelStyle: TextStyle(color: Colors.black),
                                 border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
                               validator: _validateEmailOrPhone,
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
                             const SizedBox(height: 20.0),
                             TextFormField(
@@ -109,13 +114,13 @@ class _Login_PageState extends State<Login_Page> {
                               decoration: const InputDecoration(
                                 fillColor: Colors.black,
                                 labelText: 'Password',
-                                labelStyle: TextStyle(color: Colors.grey),
+                                labelStyle: TextStyle(color: Colors.black),
                                 border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.0)),
                                 ),
                               ),
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.black),
                             ),
                           ],
                         ),
@@ -270,7 +275,7 @@ class _Login_PageState extends State<Login_Page> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: "Poppins",
-                          color: Color.fromRGBO(195, 195, 195, 1),
+                          color: Colors.black
                         ),
                       ),
                       TextButton(
@@ -280,14 +285,14 @@ class _Login_PageState extends State<Login_Page> {
                         },
                         style: TextButton.styleFrom(
                           foregroundColor:
-                              const Color.fromARGB(255, 255, 255, 255),
+                               Colors.orange,
                         ),
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: "Poppins",
-                            decoration: TextDecoration.underline,
+                            // decoration: TextDecoration.underline,
                           ),
                         ),
                       ),
