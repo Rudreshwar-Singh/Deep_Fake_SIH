@@ -50,16 +50,12 @@ class _Login_PageState extends State<Login_Page> {
       backgroundColor: Colors.white,
       body: Container(
         decoration: BoxDecoration(
-          // image: Image.asset(name),
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF800080), // Start color (Purple)
-              Color(0xFF4B0082), // End color (Indigo Purple)
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+            // image: Image.asset(name),
+            gradient: LinearGradient(
+          colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -110,7 +106,7 @@ class _Login_PageState extends State<Login_Page> {
                               controller: _passwordController,
                               obscureText: true,
                               decoration: const InputDecoration(
-                                fillColor: Colors.white,
+                                fillColor: Colors.black,
                                 labelText: 'Password',
                                 labelStyle: TextStyle(color: Colors.grey),
                                 border: OutlineInputBorder(
@@ -135,8 +131,7 @@ class _Login_PageState extends State<Login_Page> {
                                       builder: (context) => Forgotpassword()));
                             },
                             style: TextButton.styleFrom(
-                              foregroundColor:
-                                  const Color.fromRGBO(155, 0, 210, 1.0),
+                              foregroundColor: Colors.amber[700],
                             ),
                             child: const Text(
                               'Forgot your password?',
@@ -173,8 +168,8 @@ class _Login_PageState extends State<Login_Page> {
                           }
                         },
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(155, 0, 210, 1.0)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.orange),
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(16.0),

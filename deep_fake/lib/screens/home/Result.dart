@@ -51,102 +51,119 @@ class _DeepFakeAnalysisPageState extends State<DeepFakeAnalysisPage> {
       appBar: AppBar(
         title: Text('Deep Fake Analysis'),
       ),
-      body: FutureBuilder<DeepFakeAnalysis>(
-        future: futureAnalysis,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            final analysis = snapshot.data!;
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey[900],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Summary',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
+      body: Container(
+        decoration: BoxDecoration(
+              gradient:LinearGradient(
+  colors: [Color(0xFFFFFFFF), Color(0xFFFFE0B2), Color(0xFFFAF9F6)],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+)
+
+
+
+
+
+          
+            ),
+        child: SingleChildScrollView(
+          child: FutureBuilder<DeepFakeAnalysis>(
+            future: futureAnalysis,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (snapshot.hasData) {
+                final analysis = snapshot.data!;
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blueGrey[900],
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      analysis.summary,
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Inconsistencies Detected',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
-                    ),
-                    SizedBox(height: 8),
-                    for (var inconsistency in analysis.inconsistencies)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 4.0),
-                        child: Text(
-                          inconsistency,
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Summary',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          analysis.summary,
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
-                      ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Technical Analysis',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
+                        SizedBox(height: 16),
+                        Text(
+                          'Inconsistencies Detected',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
+                        ),
+                        SizedBox(height: 8),
+                        for (var inconsistency in analysis.inconsistencies)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 4.0),
+                            child: Text(
+                              inconsistency,
+                              style: TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                          ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Technical Analysis',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          analysis.technicalAnalysis,
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'Probability Score',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          '${analysis.probabilityScore.toStringAsFixed(2)}%',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                        Spacer(),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Implement PDF Download functionality here
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                          ),
+                          child: Text('Download PDF Report'),
+                        ),
+                        SizedBox(height: 8),
+                        OutlinedButton(
+                          onPressed: () {
+                            // Implement Share Results functionality here
+                          },
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: Colors.blueAccent),
+                            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                          ),
+                          child: Text(
+                            'Share Results',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      analysis.technicalAnalysis,
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Probability Score',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.lightBlueAccent),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      '${analysis.probabilityScore.toStringAsFixed(2)}%',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    Spacer(),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Implement PDF Download functionality here
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple,
-                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                      ),
-                      child: Text('Download PDF Report'),
-                    ),
-                    SizedBox(height: 8),
-                    OutlinedButton(
-                      onPressed: () {
-                        // Implement Share Results functionality here
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: Colors.blueAccent),
-                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                      ),
-                      child: Text(
-                        'Share Results',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          } else {
-            return Center(child: Text('No data available'));
-          }
-        },
+                  ),
+                );
+              } else {
+                return Center(child: Text('No data available'));
+              }
+            },
+          ),
+        ),
       ),
     );
   }
