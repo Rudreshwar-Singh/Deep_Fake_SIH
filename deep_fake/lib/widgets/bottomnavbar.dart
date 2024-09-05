@@ -40,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
         break;
       case 4:
         // Navigate to the Video List Page when the Profile icon is tapped
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => VideoListPage()),
         );

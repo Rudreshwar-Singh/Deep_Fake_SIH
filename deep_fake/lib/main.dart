@@ -18,6 +18,7 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => VideoUploadService(),
         ),
+        
         ChangeNotifierProvider(
           create: (context) => VideoAnalysisProvider(),
         ),
