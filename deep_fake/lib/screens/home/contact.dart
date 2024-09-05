@@ -1,5 +1,6 @@
 import 'package:deep_fake/services/contact/contact_provider.dart';
 import 'package:deep_fake/utils/snackbar_helper.dart';
+import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,69 +21,127 @@ class _ContactUsPageState extends State<ContactUsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Contact Us'),
+        backgroundColor: Color(0xFFFFD700), // Golden yellow for app bar
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-                onSaved: (value) => name = value!,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFFFE0B2),
+              Color(0xFFE6E6FA)
+            ], // Light yellow gradient
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'We\'d Love to Hear From You!',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    _buildTextFormField(
+                      label: 'Name',
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter your name' : null,
+                      onSaved: (value) => name = value!,
+                    ),
+                    SizedBox(height: 10),
+                    _buildTextFormField(
+                      label: 'Email',
+                      validator: (value) {
+                        if (value!.isEmpty) return 'Please enter your email';
+                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value))
+                          return 'Please enter a valid email';
+                        return null;
+                      },
+                      onSaved: (value) => email = value!,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: 10),
+                    _buildTextFormField(
+                      label: 'Subject',
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter the subject' : null,
+                      onSaved: (value) => subject = value!,
+                    ),
+                    SizedBox(height: 10),
+                    _buildTextFormField(
+                      label: 'Message',
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter your message' : null,
+                      onSaved: (value) => message = value!,
+                      maxLines: 5,
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () => _submitForm(context),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFFFD700),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'Please enter a valid email';
-                  }
-                  return null;
-                },
-                onSaved: (value) => email = value!,
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Subject'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the subject';
-                  }
-                  return null;
-                },
-                onSaved: (value) => subject = value!,
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Message'),
-                maxLines: 5,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your message';
-                  }
-                  return null;
-                },
-                onSaved: (value) => message = value!,
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => _submitForm(context),
-                child: Text('Submit'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBar(currentIndex: 3),
+    );
+  }
+
+  Widget _buildTextFormField({
+    required String label,
+    required FormFieldValidator<String> validator,
+    required FormFieldSetter<String> onSaved,
+    TextInputType keyboardType = TextInputType.text,
+    int maxLines = 1,
+  }) {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Color(0xFFDAA520)),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFFFFD700), width: 2.0),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFFDAA520)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        fillColor: Colors.white,
+        filled: true,
+      ),
+      validator: validator,
+      onSaved: onSaved,
+      keyboardType: keyboardType,
+      maxLines: maxLines,
     );
   }
 

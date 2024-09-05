@@ -95,133 +95,119 @@ class _HomePageState extends State<HomePage> {
     final isLoading = context.watch<VideoUploadService>().isLoading;
 
     return Scaffold(
-      
       drawer: Sidebar(),
       appBar: Appbar_screen(),
-      body: SingleChildScrollView(
-        child: Expanded(
-          child: Container(
-             height: 700,
-            decoration: BoxDecoration(
-              gradient:LinearGradient(
-  colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-)
-
-
-
-
-          
-            ),
-            child: Center(
-              
-              
-              child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+      body: Container(
+        height: 700,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          colors: [Color(0xFFFFE0B2), Color(0xFFE6E6FA)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(1.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
                   children: [
-                    Column(
-                      children: [
-                        // SizedBox(height: 20,),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: Text(textAlign: TextAlign.center,
-                                'Upload Video for Analysis',
-                                style: TextStyle(
-                                
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      SizedBox(height: 16,),
-                    
+                    // SizedBox(height: 20,),
                     Row(
-                     
-            children: [
-               Padding(
-                 padding: const EdgeInsets.only( left: 1.5, bottom: 40),
-                 child: Image.asset(
-                  'images/scanner.gif',
-                   width: 404,
-                  height: 300,
-                  fit: BoxFit.cover,
-                             ),
-               ),
-            
-            ]
-          ),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50),
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            'Upload Video for Analysis',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                    // SizedBox(height: 6,),
-                   
-                    // SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: _chooseFile,
-                            child: Text('Choose File'),
-                          ),
-                          SizedBox(width: 8),
-                          Flexible(
-                            child: SafeArea(
-                              child: Text(
-                                _fileName,
-                                style: TextStyle(color: Colors.white70),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ),
-                          ),
-                        ],
+                    SizedBox(
+                      height: 16,
+                    ),
+
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 1.5, bottom: 40),
+                        child: Image.asset(
+                          'images/scanner.gif',
+                          width: 300,
+                          height: 300,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Select Analysis Type:',
-                      style: TextStyle(color: Colors.white70),
-                    ),
-                    DropdownButton<String>(
-                      value: _analysisType,
-                      dropdownColor: Color.fromARGB(255, 20, 182, 236),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _analysisType = newValue!;
-                        });
-                      },
-                      items: <String>['Spatial Analysis', 'Temporal Analysis']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: TextStyle(color: Color.fromARGB(255, 67, 40, 239)),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: isLoading ? null : _submit,
-                      child: Text('Submit'),
-                    ),
+                    ]),
                   ],
                 ),
-              ),
-            ),
-          
+                // SizedBox(height: 6,),
+
+                // SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _chooseFile,
+                        child: Text('Choose File'),
+                      ),
+                      SizedBox(width: 8),
+                      Flexible(
+                        child: SafeArea(
+                          child: Text(
+                            _fileName,
+                            style: TextStyle(
+                                color: const Color.fromARGB(179, 29, 29, 29)),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                SizedBox(height: 16),
+                Text(
+                  'Select Analysis Type:',
+                  style: TextStyle(
+                      color: const Color.fromARGB(179, 137, 137, 137)),
+                ),
+                DropdownButton<String>(
+                  value: _analysisType,
+                  dropdownColor: Color.fromARGB(255, 20, 182, 236),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _analysisType = newValue!;
+                    });
+                  },
+                  items: <String>['Spatial Analysis', 'Temporal Analysis']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style:
+                            TextStyle(color: Color.fromARGB(255, 67, 40, 239)),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: isLoading ? null : _submit,
+                  child: Text('Submit'),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavBar(currentIndex: 0),

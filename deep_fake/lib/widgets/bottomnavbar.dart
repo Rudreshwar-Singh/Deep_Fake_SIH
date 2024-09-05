@@ -1,6 +1,5 @@
 import 'package:deep_fake/screens/home/collection.dart';
 import 'package:deep_fake/screens/home/contact.dart';
-import 'package:deep_fake/screens/home/contact.dart';
 import 'package:deep_fake/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
