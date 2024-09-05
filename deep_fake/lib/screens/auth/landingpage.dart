@@ -51,14 +51,13 @@ class _landingPageState extends State<landingPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "DeFake.ai",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            // fontFamily: 'japanese',
-                            fontSize: 60,
-                            color: Colors.black),
-                      ),
+                     
+                      Text("DeFake.ai",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                               fontFamily: 'Poppins',
+                              fontSize: 60,
+                              color: Colors.black),),
                     ],
                   ),
 
