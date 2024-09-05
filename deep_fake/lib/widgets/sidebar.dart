@@ -1,3 +1,4 @@
+import 'package:deep_fake/screens/auth/login.dart';
 import 'package:deep_fake/screens/home/collection.dart';
 import 'package:deep_fake/screens/settings.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class Sidebar extends StatelessWidget {
                   UserAccountsDrawerHeader(
                     arrowColor: Colors.yellow,
                     accountName: Text('Rudreshwar Singh'),
-                     accountEmail: Text('12ru@gmail.com'),
+                    accountEmail: Text('12ru@gmail.com'),
                     currentAccountPicture: CircleAvatar(
                       backgroundImage:
                           NetworkImage('https://via.placeholder.com/150'),
@@ -55,6 +56,8 @@ class Sidebar extends StatelessWidget {
               title:
                   Text('Logout Account', style: TextStyle(color: Colors.red)),
               onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Login_Page()));
                 // Handle Logout tap
               },
             ),

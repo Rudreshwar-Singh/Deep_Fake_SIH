@@ -76,14 +76,14 @@ class _Login_PageState extends State<Login_Page> {
                         // child: Image.asset('images/moofli_logo.jpg'),
                       ),
                       const SizedBox(height: 20.0),
-                      const Text(
+                       Text(
                         'Welcome!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: "Poppins",
                           fontSize: 27,
                           fontWeight: FontWeight.w400,
-                          color: Colors.white
+                          color: Colors.yellow[900]
                         ),
                       ),
                       const SizedBox(height: 20.0),
@@ -152,11 +152,15 @@ class _Login_PageState extends State<Login_Page> {
                             if (success) {
                               showSuccessMessage(context,
                                   message: 'Log in Successful');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage()),
-                              );
+                                   Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => HomePage()),
+                              // );
                             } else {
                               showErrorMessage(context,
                                   message: 'Login Failed. Please try again.');

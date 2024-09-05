@@ -71,51 +71,54 @@ class _ForgotpasswordState extends State<Forgotpassword> {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Forgot Password',
-                  style: TextStyle(fontSize: 24.0, color: Colors.purpleAccent),
-                ),
-                SizedBox(height: 20.0),
-                TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Enter your email',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                ElevatedButton(
-                  child: Text('Get Security Question'),
-                  onPressed: getSecurityQuestion,
-                ),
-                if (showSecurityQuestion) ...[
-                  SizedBox(height: 20.0),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
                   Text(
-                    securityQuestion,
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
+                    'Forgot Password',
+                    style: TextStyle(fontSize: 24.0, color: Colors.purpleAccent),
                   ),
-                  SizedBox(height: 10.0),
+                  SizedBox(height: 20.0),
                   TextFormField(
-                    controller: answerController,
+                    controller: emailController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      hintText: 'Answer',
+                      hintText: 'Enter your email',
                       border: OutlineInputBorder(),
                     ),
                   ),
                   SizedBox(height: 20.0),
                   ElevatedButton(
-                    child: Text('Verify Answer'),
-                    onPressed: verifyAnswer,
+                    child: Text('Get Security Question'),
+                    onPressed: getSecurityQuestion,
                   ),
+                  if (showSecurityQuestion) ...[
+                    SizedBox(height: 20.0),
+                    Text(
+                      securityQuestion,
+                      style: TextStyle(fontSize: 18.0, color: Colors.white),
+                    ),
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      controller: answerController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        hintText: 'Answer',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    ElevatedButton(
+                      child: Text('Verify Answer'),
+                      onPressed: verifyAnswer,
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         ),

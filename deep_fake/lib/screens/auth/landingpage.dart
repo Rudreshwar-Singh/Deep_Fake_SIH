@@ -58,7 +58,7 @@ class _landingPageState extends State<landingPage> {
                       Text("DeFake.ai",
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              // fontFamily: 'japanese',
+                               fontFamily: 'Poppins',
                               fontSize: 60,
                               color: Colors.black),),
                     ],
