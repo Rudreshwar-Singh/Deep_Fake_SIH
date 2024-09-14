@@ -2,6 +2,9 @@ import 'package:deep_fake/screens/home/collection.dart';
 import 'package:deep_fake/screens/home/contact.dart';
 import 'package:deep_fake/screens/home/home.dart';
 import 'package:deep_fake/screens/home/howitwork.dart';
+import 'package:deep_fake/screens/home/more_page.dart';
+import 'package:deep_fake/screens/home/user_train.dart';
+import 'package:deep_fake/screens/home/video_page.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:deep_fake/screens/home/about.dart';
@@ -14,35 +17,35 @@ class BottomNavBar extends StatelessWidget {
   void _navigateToPage(int index, BuildContext context) {
     switch (index) {
       case 0:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => HomePage()),
         );
         break;
       case 1:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AboutUsPage()),
+          MaterialPageRoute(builder: (context) => VideoPage()),
         );
         break;
       case 2:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HowItWorksPage()),
+          MaterialPageRoute(builder: (context) => VideoListPage()),
         );
-        
+
         break;
       case 3:
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ContactUsPage()),
+          MaterialPageRoute(builder: (context) => UserTrain()),
         );
         break;
       case 4:
         // Navigate to the Video List Page when the Profile icon is tapped
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => VideoListPage()),
+          MaterialPageRoute(builder: (context) => MorePage()),
         );
         break;
     }
@@ -56,11 +59,11 @@ class BottomNavBar extends StatelessWidget {
       activeColor: Colors.black,
       style: TabStyle.fixedCircle,
       items: [
-        TabItem(icon: Icons.home, title: 'Home'),
-        TabItem(icon: Icons.save, title: 'Collection'),
+        TabItem(icon: Icons.mic, title: 'Audio'),
+        TabItem(icon: Icons.video_call_rounded, title: 'Video'),
         TabItem(icon: Icons.add, title: 'Add'),
-        TabItem(icon: Icons.phone, title: 'Contact'),
-        TabItem(icon: Icons.person, title: 'Profile'),
+        TabItem(icon: Icons.person, title: 'User'),
+        TabItem(icon: Icons.settings, title: 'More'),
       ],
       initialActiveIndex: currentIndex,
       onTap: (index) => _navigateToPage(index, context),

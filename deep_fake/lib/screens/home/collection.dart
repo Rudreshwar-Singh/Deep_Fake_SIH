@@ -112,7 +112,6 @@
 //   }
 // }
 
-
 import 'package:deep_fake/services/video/video_store.dart';
 import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
@@ -163,7 +162,7 @@ class VideoListPage extends StatelessWidget {
           );
         },
       ),
-       bottomNavigationBar: BottomNavBar(currentIndex: 0),
+      bottomNavigationBar: BottomNavBar(currentIndex: 2),
     );
   }
 }

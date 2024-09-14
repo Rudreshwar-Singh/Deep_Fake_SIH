@@ -1,6 +1,5 @@
 import 'package:deep_fake/services/contact/contact_provider.dart';
 import 'package:deep_fake/utils/snackbar_helper.dart';
-import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -112,7 +111,6 @@ class _ContactUsPageState extends State<ContactUsPage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(currentIndex: 3),
     );
   }
 

@@ -1,26 +1,19 @@
-import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 
 class HowItWorksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('How It Works'),
-      // ),
+      appBar: AppBar(
+        title: Text('How It Works'),
+      ),
       body: Container(
-         decoration: BoxDecoration(
-              gradient:LinearGradient(
-  colors: [Color(0xFFFFFFFF), Color(0xFFE6E6FA), Color(0xFFFFE0B2)],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-)
-
-
-
-
-          
-            ),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          colors: [Color(0xFFFFFFFF), Color(0xFFE6E6FA), Color(0xFFFFE0B2)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        )),
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(25.0),
@@ -37,7 +30,7 @@ class HowItWorksPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                 SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   'Our deep fake detection technology employs a multi-faceted approach to identify and authenticate face-swap deep fake videos. Here’s a breakdown of how our system works:',
                   style: TextStyle(fontSize: 16, color: Colors.black),
@@ -88,7 +81,6 @@ class HowItWorksPage extends StatelessWidget {
           ),
         ),
       ),
-       bottomNavigationBar: BottomNavBar(currentIndex: 0),
     );
   }
 
@@ -120,8 +112,6 @@ class HowItWorksPage extends StatelessWidget {
           ),
         ],
       ),
-      
     );
-   
   }
 }

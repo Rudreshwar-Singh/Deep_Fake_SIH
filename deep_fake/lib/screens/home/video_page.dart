@@ -9,12 +9,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:deep_fake/services/video/video_store.dart';
 
-class HomePage extends StatefulWidget {
+class VideoPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _VideoPageState createState() => _VideoPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _VideoPageState extends State<VideoPage> {
   String _fileName = 'No file chosen';
   String _filePath = '';
   String _analysisType = 'Spatial Video Analysis';
@@ -208,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.only(left: 50),
                             child: Text(
                               textAlign: TextAlign.center,
-                              'Upload Audio for Analysis',
+                              'Upload Video for Analysis',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -244,7 +244,6 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 30),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
                           onPressed: _chooseFile,
@@ -305,7 +304,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(currentIndex: 0),
+      bottomNavigationBar: BottomNavBar(currentIndex: 1),
     );
   }
 }

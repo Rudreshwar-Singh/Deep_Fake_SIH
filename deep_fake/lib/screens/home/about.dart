@@ -1,4 +1,3 @@
-import 'package:deep_fake/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsPage extends StatelessWidget {
@@ -6,10 +5,10 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.black,
-      // appBar: AppBar(
-      //   title: Text('About Us'),
-      //   backgroundColor: Colors.black,
-      // ),
+      appBar: AppBar(
+        toolbarHeight: 35,
+        backgroundColor: Colors.white,
+      ),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -19,7 +18,7 @@ class AboutUsPage extends StatelessWidget {
         )),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
+            padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,7 +130,6 @@ class AboutUsPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(currentIndex: 1),
     );
   }
 }
